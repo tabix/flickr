@@ -45,10 +45,11 @@ class Request
     public function setRequestMethod($method)
     {
         $m = strtoupper($method);
-        if ($m == 'GET' || $m == 'POST')
+        if ($m == 'GET' || $m == 'POST') {
             $this->__method = $m;
-        else
+        } else {
             throw new Exception("Unsupported request method '{$method}'! Only GET and POST are supported.");
+        }
     }
 
     /**
@@ -75,12 +76,9 @@ class Request
      */
     public function __get($name)
     {
-        if ($this->exists($name))
-        {
+        if ($this->exists($name)) {
             return $this->__properties[$name];
-        }
-        else
-        {
+        } else {
             throw new Exception("Property '{$name}' not exists!");
         }
     }
