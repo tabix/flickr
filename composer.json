@@ -16,5 +16,9 @@
         "psr-4": {
             "Tabix\\Flickr\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always",
+        "test:coverage": "vendor/bin/phpunit --coverage-text --colors=always"
     }
 }
