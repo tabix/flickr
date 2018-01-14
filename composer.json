@@ -1,6 +1,7 @@
 {
     "name": "tabix/flickr",
     "type": "library",
+    "description": "PHP Flickr API Client",
     "require-dev": {
         "phpunit/phpunit": "^6.5"
     },
