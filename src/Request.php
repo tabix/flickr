@@ -30,7 +30,7 @@ class Request
      * 
      * @param array $data
      */
-    public function __construct(array $data = [], $method = 'GET', $endpoint = null)
+    public function __construct(array $data, $method = 'GET', $endpoint = null)
     {
         $this->__properties = $data + $this->__properties;
         $this->setEndpoint($endpoint);

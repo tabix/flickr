@@ -9,7 +9,7 @@ class RequestTest extends TestCase
 
     public function setUp()
     {
-        $this->request = new Request();
+        $this->request = new Request([]);
     }
 
     public function testExistsDefaultValues()
