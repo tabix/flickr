@@ -55,11 +55,17 @@ class RequestTest extends TestCase
     {
         $this->assertEquals('GET', $this->request->getRequestMethod());
     }
-
+    
     public function testSetRequestMethod()
     {
         $this->request->setRequestMethod('post');
         $this->assertEquals('POST', $this->request->getRequestMethod());
+    }
+
+    public function testConstructorWithRequestMethod()
+    {
+        $request = new Request([], 'POST');
+        $this->assertEquals('POST', $request->getRequestMethod());
     }
 
     /**
@@ -68,5 +74,24 @@ class RequestTest extends TestCase
     public function testBadRequestMethod()
     {
         $this->request->setRequestMethod('put');
+    }
+
+    public function testGetEndpoint()
+    {
+        $this->assertEquals(null, $this->request->getEndpoint());
+    }
+
+    public function testSetEndpoint()
+    {
+        $endpoint = 'https://www.example.com/';
+        $this->request->setEndpoint($endpoint);
+        $this->assertEquals($endpoint, $this->request->getEndpoint());
+    }
+
+    public function testConstructorWithEndpoint()
+    {
+        $endpoint = 'https://www.example.com/';
+        $request = new Request([], 'GET', $endpoint);
+        $this->assertEquals($endpoint, $request->getEndpoint());
     }
 }

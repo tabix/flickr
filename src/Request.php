@@ -19,15 +19,38 @@ class Request
     /**
      * @var string
      */
-    private $__method = 'GET';
+    private $__method;
+
+    /**
+     * @var string|null
+     */
+    private $__endpoint;
 
     /**
      * 
      * @param array $data
      */
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], $method = 'GET', $endpoint = null)
     {
         $this->__properties = $data + $this->__properties;
+        $this->setEndpoint($endpoint);
+        $this->setRequestMethod($method);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEndpoint()
+    {
+        return $this->__endpoint;
+    }
+
+    /**
+     * @param string|null $endpoint
+     */
+    public function setEndpoint($endpoint = null)
+    {
+        $this->__endpoint = $endpoint;
     }
 
     /**
