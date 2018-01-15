@@ -11,16 +11,24 @@ class Flickr
      */
     private $__client;
 
-    private $__defaultApiKey = null;
+    /**
+     * @var string
+     */
+    private $__defaultApiKey;
 
+    /**
+     * @var string
+     */
     private $__defaultResponseFormat = 'php_serial';
 
     /**
-     * @param Client $client
+     * @param string $api_key
+     * @param ClientFactory $cf
      */
-    public function __construct($api_key)
+    public function __construct($api_key, ClientFactory $cf)
     {
         $this->setDefaultApiKey($api_key);
+        $this->__client = $cf->createClient();
     }
 
     public function getClient()
