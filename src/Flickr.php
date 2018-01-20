@@ -22,13 +22,17 @@ class Flickr
     private $__defaultResponseFormat = 'php_serial';
 
     /**
-     * @param string $api_key
-     * @param ClientFactory $cf
+     * @param string $apiKey
+     * @param Client $client
      */
-    public function __construct($api_key, ClientFactory $cf)
+    public function __construct($apiKey, $clientType = ClientFactory::TYPE_REST, ClientFactory $cf = null)
     {
-        $this->setDefaultApiKey($api_key);
-        $this->__client = $cf->createClient();
+        if (null == $cf) {
+            $cf = new DefaultClientFactory();
+        }
+
+        $this->setDefaultApiKey($apiKey);
+        $this->setClient($cf->createClient($clientType));
     }
 
     public function getClient()
@@ -39,6 +43,7 @@ class Flickr
     public function setClient(Client $client)
     {
         $this->__client = $client;
+        return $this;
     }
 
     public function getDefaultApiKey()
@@ -49,6 +54,7 @@ class Flickr
     public function setDefaultApiKey($key)
     {
         $this->__defaultApiKey = $key;
+        return $this;
     }
 
     public function getDefaultResponseFormat()
@@ -59,6 +65,7 @@ class Flickr
     public function setDefaultResponseFormat($format)
     {
         $this->__defaultResponseFormat = $format;
+        return $this;
     }
 
     /**
@@ -69,7 +76,7 @@ class Flickr
     public function send(Request $request, Client $client = null)
     {
         if (null == $client) {
-            $client = $this->__client;
+            $client = $this->getClient();
         }
 
         $r = clone $request;
@@ -83,5 +90,24 @@ class Flickr
         }
 
         return $client->send($r);
+    }
+
+    /**
+     * 
+     * @return Request
+     */
+    public function request($method, array $params)
+    {
+        $params['method'] = $method;
+        return new Request($params);
+    }
+    
+    /**
+     * 
+     * @return mixed
+     */
+    public function requestSend($method, array $params, Client $client = null)
+    {
+        return $this->send($this->request($method, $params), $client);
     }
 }

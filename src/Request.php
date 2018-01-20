@@ -105,4 +105,9 @@ class Request
             throw new Exception("Property '{$name}' not exists!");
         }
     }
+
+    public function asArray()
+    {
+        return $this->__properties;
+    }
 }

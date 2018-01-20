@@ -1,0 +1,22 @@
+<?php
+require_once('../vendor/autoload.php');
+
+use Tabix\Flickr\HttpCurl;
+use Tabix\Flickr\RESTClient;
+use Tabix\Flickr\Request;
+
+$http = new HttpCurl();
+$c = new RESTClient($http, 'http://192.168.0.27:8081');
+
+try {
+    $r = new Request([
+        'api_key' => '81e7e11aeac57ac668609d316f6388ce',
+        'method' => 'flickr.photos.getInfo',
+        'photo_id' => '251875545'
+    ]);
+    // $r->setRequestMethod('POST');
+
+    echo $c->send($r);
+} catch(Exception $e) {
+    echo "ERROR ({$e->getCode()}): {$e->getMessage()}\n";
+}
